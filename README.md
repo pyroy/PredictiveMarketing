@@ -7,7 +7,7 @@ Hierbij helpen we een bedrijf met het ontwikkelen van nieuwe software.
 ## Team Members
 - Murtaza
 
-- SALOSALOSALOSALOSALOSALOSALO
+- Sola Lucanes
 
 - Roy
 
