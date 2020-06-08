@@ -15,3 +15,12 @@ conv = tussen 2 en 4%
 neem conv als 3%
 0,55 * 0,03= 0,0165
 0,0165 - 0,22 = - 0,2035
+
+---
+
+ctr = 0.025
+conv = 0.03
+productwaarde = 100
+winst per click = 0.025 * 0.03 * 100 = 0.075$
+kost per click = 0.22
+winst marge = 0.075 - 0.22 = -0.145$
