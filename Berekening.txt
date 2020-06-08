@@ -1,0 +1,17 @@
+Benodigde values: 
+-Cost Per Click
+-CTR
+-Conv
+
+(prijs)Volume * (percentage)CTR * Cost per Click * (percentage)Conv = uitkomst van advertentie (uva) ;D
+
+uva - cpc = winst
+
+voorbeeld nike schoen
+cpc= 0.22
+ctr= 2.5%
+conv = tussen 2 en 4%
+100*0,025*0,22=0.55
+neem conv als 3%
+0,55 * 0,03= 0,0165
+0,0165 - 0,22 = - 0,2035
