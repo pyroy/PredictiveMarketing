@@ -1,3 +1,3 @@
 import pandas
 
-pandas.load_csv("Domein rapport - Socialbrothers.nl.csv")
+domein_rapport = pandas.read_csv("Domein rapport - Socialbrothers.nl.csv")
