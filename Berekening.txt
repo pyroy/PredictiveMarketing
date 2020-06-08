@@ -21,6 +21,10 @@ neem conv als 3%
 ctr = 0.025
 conv = 0.03
 productwaarde = 100
-winst per click = 0.025 * 0.03 * 100 = 0.075$
-kost per click = 0.22
+omzet per click = 0.025 * 0.03 * 100 = 0.075$
+Cost per click (CPC) = 0.22
 winst marge = 0.075 - 0.22 = -0.145$
+
+formule = 
+CTR * CONVERTION RATIO * PRODUCTWAARDE = OMZET PER CLICK (OMP)
+WINST MARGE = OMP - CPC
