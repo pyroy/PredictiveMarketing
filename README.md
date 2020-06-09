@@ -7,10 +7,10 @@ Hierbij helpen we een bedrijf met het ontwikkelen van nieuwe software.
 ## Team Members
 - Murtaza
 
-- Sola Lucanes
+- the Sola Lucanes
 
 - Roy
 
 - Rutger
 
-- Martino
+- Martinooo met 3 o's
