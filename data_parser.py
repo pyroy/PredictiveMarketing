@@ -11,5 +11,10 @@ google_ads = google_ads.loc[google_ads['CTR'] != ' --']
 google_ads = google_ads.loc[google_ads['CTR'] != '0,00%']
 google_ads.drop(google_ads.tail(3).index,inplace=True)
 
+domein_rapport = domein_rapport.loc[domein_rapport['Traffic'] != 0]
+
 with open("Datasets/google_ads.pydb", "wb") as file:
     pickle.dump(google_ads, file)
+
+with open("Datasets/domain_rapport.pydb", "wb") as file:
+    pickle.dump(domein_rapport, file)
