@@ -71,12 +71,12 @@ class Example(Frame):
         product_box = tk.Entry(frame3,textvariable = product_value)
         product_box.place(x=128,y=60)
 
-        conversion_label = tk.Label(frame3,text="Conversion ratio:",bg="darkorange",fg="black")
+        conversion_label = tk.Label(frame3,text="Conversion to sale ratio:",bg="darkorange",fg="black")
         conversion_label.place(x=0,y=100,height=18)
 
         conversion_value = DoubleVar()
         conversion_box = tk.Entry(frame3,textvariable = conversion_value)
-        conversion_box.place(x=96,y=100)
+        conversion_box.place(x=132,y=100)
 
         self.label2 = tk.Label(frame3,text="Business type:",bg="darkorange",fg="black")
         self.label2.place(x=0,y=20,height=18)
