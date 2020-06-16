@@ -17,7 +17,7 @@ def equation1(database=DB, keyword='social brothers', conv=0.03, productwaarde=1
     omzet_per_click = CTR * conv * productwaarde
     return omzet_per_click - CPC
 
-def get_suggested_keywords(keyword_rapport=DBZ, budget=500, conv=0.03, avg_product_value=100, cutoff=10):
+def get_suggested_keywords(keyword_rapport=DBZ, budget=500, conv=0.03, avg_product_value=100, cutoff=10, mode="cpc"):
     omzet_values = {}
     volume_values = {}
     cd_values = {}
@@ -32,23 +32,26 @@ def get_suggested_keywords(keyword_rapport=DBZ, budget=500, conv=0.03, avg_produ
         k.append(row['Keyword'])
 
     # Only takes CPC into account
-    #suggestions = sorted(k, key = lambda keyword: -omzet_values[keyword])[:cutoff]
+    if mode == "cpc":
+        suggestions = sorted(k, key = lambda keyword: -omzet_values[keyword])[:cutoff]
 
     # Takes search volume into account
-    #suggestions = sorted(k, key = lambda keyword: -omzet_values[keyword]*math.log(volume_values[keyword]))[:cutoff]
+    elif mode == "cpc+sv":
+        suggestions = sorted(k, key = lambda keyword: -omzet_values[keyword]*math.log(volume_values[keyword]))[:cutoff]
 
     # Take SV & Competitive Density into account
-    suggestions = sorted(k, key = lambda keyword: -omzet_values[keyword]*math.log(volume_values[keyword])/cd_values[keyword])[:cutoff]
+    else:
+        suggestions = sorted(k, key = lambda keyword: -omzet_values[keyword]*math.log(volume_values[keyword])/cd_values[keyword])[:cutoff]
     
     total_search_volume = sum([volume_values[k] for k in suggestions])
     total_revenue = sum([omzet_values[k] for k in suggestions])
     total_competition = sum([-math.log(cd_values[k]) for k in suggestions])
     return suggestions, total_search_volume, total_revenue, total_competition
 
-def get_suggestions():
-    budget = 500
+def get_suggestions(mode="cpc"):
+    budget = 5000
     cutoff = 10
-    sk, tsv, tr, tc = get_suggested_keywords(budget = budget/cutoff)
+    sk, tsv, tr, tc = get_suggested_keywords(budget = budget/cutoff, mode = mode)
     print("Suggested keywords:")
     for k in sk:
         print("- " + k)
