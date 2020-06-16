@@ -1,12 +1,15 @@
 import pandas
-import pickle
+import pickle, math
 
-# Load ion the database
+# Load in the database
 with open("Datasets/domain_rapport.pydb", "rb") as file:
     DB = pickle.load(file)
 
+with open("Datasets/stofzuiger.pydb", "rb") as file:
+    DBZ = pickle.load(file)
+
 # Calculate profit per keyword using the equation in berekening.txt
-def equation(database=DB, keyword='social brothers', conv=0.03, productwaarde=100):
+def equation1(database=DB, keyword='social brothers', conv=0.03, productwaarde=100):
     row = DB.loc[DB['Keyword'] == keyword]
     CTR = int(row['Traffic'])/int(row['Search Volume'])
     CPC = float(row['CPC'])
@@ -14,11 +17,34 @@ def equation(database=DB, keyword='social brothers', conv=0.03, productwaarde=10
     omzet_per_click = CTR * conv * productwaarde
     return omzet_per_click - CPC
 
-# Calculate total CTR
-sv = 0
-tt = 0
-for index, row in DB.iterrows():
-    sv += int(row['Search Volume'])
-    tt += int(row['Traffic'])
-    
-tctr = tt / sv
+def get_suggested_keywords(keyword_rapport=DBZ, budget=500, conv=0.03, avg_product_value=100, cutoff=10):
+    omzet_values = {}
+    volume_values = {}
+    k = []
+    for index, row in DBZ.iterrows():
+        # clicks * conversion * product value
+        if float(row['CPC (USD)']) == 0.0: continue
+        omzet = min(budget/float(row['CPC (USD)']), row['Volume']) * conv * avg_product_value - budget
+        omzet_values[row['Keyword']] = omzet
+        volume_values[row['Keyword']] = row['Volume']
+        k.append(row['Keyword'])
+    suggestions = sorted(k, key = lambda keyword: -omzet_values[keyword])[:cutoff]
+    total_search_volume = sum([volume_values[k] for k in suggestions])
+    total_revenue = sum([omzet_values[k] for k in suggestions])
+    return suggestions, total_search_volume, total_revenue
+
+def get_suggestions():
+    budget = 500
+    cutoff = 10
+    sk, tsv, tr = get_suggested_keywords(budget = budget/cutoff)
+    print("Suggested keywords:")
+    for k in sk:
+        print("- " + k)
+    print("\nTotal Search Volume:\t{}".format(tsv))
+    print("\n=====\nBudget:\t\t\t{}$".format(budget))
+    print("Total Revenue:\t\t{}$".format(round(tr,2)))
+    pm = int(100*tr/budget-100)
+    if pm > 0:
+        print("Profit Margin:\t\t+{}%".format(pm))
+    else:
+        print("Profit Margin:\t\t-{}%".format(pm))

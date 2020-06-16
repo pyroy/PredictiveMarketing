@@ -18,3 +18,6 @@ with open("Datasets/google_ads.pydb", "wb") as file:
 
 with open("Datasets/domain_rapport.pydb", "wb") as file:
     pickle.dump(domein_rapport, file)
+
+with open("Datasets/stofzuiger.pydb", "wb") as file:
+    pickle.dump(rapport, file)
