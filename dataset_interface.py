@@ -49,7 +49,7 @@ def get_suggested_keywords(keyword_rapport=DBZ, budget=500, conv=0.03, avg_produ
     return suggestions, total_search_volume, total_revenue, total_competition
 
 def get_suggestions(mode="cpc", budget=5000, cutoff=10):
-    sk, tsv, tr, tc = get_suggested_keywords(budget = budget/cutoff, mode = mode, cutoff = cutoff)
+    sk, tsv, tr, tc = get_suggested_keywords(budget = budget/cutoff, cutoff = cutoff, mode = mode)
     print("Suggested keywords:")
     for k in sk:
         print("- " + k)
