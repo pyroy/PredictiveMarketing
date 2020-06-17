@@ -17,16 +17,22 @@ def equation1(database=DB, keyword='social brothers', conv=0.03, productwaarde=1
     omzet_per_click = CTR * conv * productwaarde
     return omzet_per_click - CPC
 
-def get_suggested_keywords(keyword_rapport=DBZ, budget=500, conv=0.03, avg_product_value=100, cutoff=10, mode="cpc"):
+def get_suggested_keywords(keyword_rapport=DBZ, budget_per_keyword=500, ctr=0.1, conv=0.03, avg_product_value=100, cutoff=10, mode="cpc"):
     omzet_values = {}
     volume_values = {}
     cd_values = {}
+    click_v = {}
+    unspent_v = {}
     k = []
     for index, row in DBZ.iterrows():
         # clicks * conversion * product value
         if float(row['CPC (USD)']) == 0.0: continue
-        omzet = min(budget/float(row['CPC (USD)']), row['Volume']) * conv * avg_product_value - budget
+        clicks = math.floor(min(budget_per_keyword/float(row['CPC (USD)']), row['Volume'] * ctr))
+        unspent_budget = budget_per_keyword - clicks * float(row['CPC (USD)'])
+        omzet = clicks * conv * avg_product_value - clicks * float(row['CPC (USD)'])
         omzet_values[row['Keyword']] = omzet
+        click_v[row['Keyword']] = clicks
+        unspent_v[row['Keyword']] = unspent_budget
         volume_values[row['Keyword']] = row['Volume']
         cd_values[row['Keyword']] = row['Competitive Density']
         k.append(row['Keyword'])
@@ -43,22 +49,24 @@ def get_suggested_keywords(keyword_rapport=DBZ, budget=500, conv=0.03, avg_produ
     else:
         suggestions = sorted(k, key = lambda keyword: -omzet_values[keyword]*math.log(volume_values[keyword])/cd_values[keyword])[:cutoff]
     
-    total_search_volume = sum([volume_values[k] for k in suggestions])
+    total_clicks = sum([click_v[k] for k in suggestions])
     total_revenue = sum([omzet_values[k] for k in suggestions])
     total_competition = sum([-math.log(cd_values[k]) for k in suggestions])
-    return suggestions, total_search_volume, total_revenue, total_competition
+    total_unspent_budget = sum([unspent_v[k] for k in suggestions])
+    return suggestions, total_clicks, total_revenue, total_competition, total_unspent_budget
 
 def get_suggestions(mode="cpc", budget=5000, cutoff=10):
-    sk, tsv, tr, tc = get_suggested_keywords(budget = budget/cutoff, cutoff = cutoff, mode = mode)
+    sk, tcs, tr, tc, tub = get_suggested_keywords(budget_per_keyword = budget/cutoff, cutoff = cutoff, mode = mode)
     print("Suggested keywords:")
     for k in sk:
         print("- " + k)
-    print("\nTotal Search Volume:\t{}".format(tsv))
+    print("\nTotal Clicks:\t\t{}".format(int(tcs)))
     print("Negative Log CD:\t{}".format(round(tc,2)))
     print("\n=====\nBudget:\t\t\t{}$".format(budget))
+    print("Unspent Budget:\t\t{}$".format(round(tub,2)))
     print("Total Revenue:\t\t{}$".format(round(tr,2)))
-    pm = int(100*tr/budget-100)
+    pm = int(100*tr/(budget-tub)-100)
     if pm > 0:
         print("Profit Margin:\t\t+{}%".format(pm))
     else:
-        print("Profit Margin:\t\t-{}%".format(pm))
+        print("Profit Margin:\t\t{}%".format(pm))
