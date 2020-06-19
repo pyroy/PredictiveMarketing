@@ -17,37 +17,30 @@ def equation1(database=DB, keyword='social brothers', conv=0.03, productwaarde=1
     omzet_per_click = CTR * conv * productwaarde
     return omzet_per_click - CPC
 
-def get_suggested_keywords(keyword_rapport=DBZ, budget_per_keyword=500, ctr=0.1, conv=0.03, avg_product_value=100, cutoff=10, mode="cpc"):
-    omzet_values = {}
+def get_suggested_keywords(keyword_rapport=DBZ, conv=0.03, avg_product_value=100, cutoff=10, mode="cpc"):
+    profit_values = {}
     volume_values = {}
-    cd_values = {}
-    click_v = {}
-    unspent_v = {}
-    k = []
+    recommend_sea = []
+    recommend_seo = []
     for index, row in DBZ.iterrows():
         # clicks * conversion * product value
         if float(row['CPC (USD)']) == 0.0: continue
-        clicks = math.floor(min(budget_per_keyword/float(row['CPC (USD)']), row['Volume'] * ctr))
-        unspent_budget = budget_per_keyword - clicks * float(row['CPC (USD)'])
-        omzet = clicks * conv * avg_product_value - clicks * float(row['CPC (USD)'])
-        omzet_values[row['Keyword']] = omzet
+        profit = avg_product_value - int(1/conv) * float(row['CPC (USD)'])
+        profit_values[row['Keyword']] = profit
         click_v[row['Keyword']] = clicks
-        unspent_v[row['Keyword']] = unspent_budget
-        volume_values[row['Keyword']] = row['Volume']
-        cd_values[row['Keyword']] = row['Competitive Density']
         k.append(row['Keyword'])
 
     # Only takes CPC into account
     if mode == "cpc":
-        suggestions = sorted(k, key = lambda keyword: -omzet_values[keyword])[:cutoff]
+        suggestions = sorted(k, key = lambda keyword: -profit_values[keyword])[:cutoff]
 
     # Takes search volume into account
     elif mode == "cpc+sv":
-        suggestions = sorted(k, key = lambda keyword: -omzet_values[keyword]*math.log(volume_values[keyword]))[:cutoff]
+        suggestions = sorted(k, key = lambda keyword: -profit_values[keyword]*math.log(volume_values[keyword]))[:cutoff]
 
     # Take SV & Competitive Density into account
     else:
-        suggestions = sorted(k, key = lambda keyword: -omzet_values[keyword]*math.log(volume_values[keyword])/cd_values[keyword])[:cutoff]
+        suggestions = sorted(k, key = lambda keyword: -profit_values[keyword]*math.log(volume_values[keyword])/cd_values[keyword])[:cutoff]
     
     total_clicks = sum([click_v[k] for k in suggestions])
     total_revenue = sum([omzet_values[k] for k in suggestions])
