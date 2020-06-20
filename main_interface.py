@@ -56,7 +56,7 @@ class Example(Frame):
             label4.pack()
             info_window.mainloop()
 
-        tabControl = ttk.Notebook(self,height=500,width=400)     
+        tabControl = ttk.Notebook(self,height=500,width=400)
 
         frame2 = tk.Frame(self,bg="darkorange")
         frame2.place(x=5, y=140)
@@ -65,7 +65,7 @@ class Example(Frame):
         bg_label = tk.Label(frame2, image = self.render)
         bg_label.place(x=0, y=0, relwidth=1, relheight=1)
         bg_label.image = self.render
-        
+
         product_name = tk.Label(frame2,text="Product name:",bg="darkorange",fg="black")
         product_name.place(x=0,y=20,height=18)
 
@@ -137,7 +137,7 @@ class Example(Frame):
 
         frame4 = tk.Frame(self,bg="darkorange",name="frame4")
         frame4.place(x=5, y=200)
-        tabControl.add(frame4, text='Websop')
+        tabControl.add(frame4, text='Webshop')
 
         bg_label = tk.Label(frame4, image = self.render)
         bg_label.place(x=0, y=0, relwidth=1, relheight=1)
