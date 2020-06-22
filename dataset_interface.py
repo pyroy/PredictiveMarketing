@@ -8,15 +8,6 @@ with open("Datasets/domain_rapport.pydb", "rb") as file:
 with open("Datasets/stofzuiger.pydb", "rb") as file:
     DBZ = pickle.load(file)
 
-# Calculate profit per keyword using the equation in berekening.txt
-def equation1(database=DB, keyword='social brothers', conv=0.03, productwaarde=100):
-    row = DB.loc[DB['Keyword'] == keyword]
-    CTR = int(row['Traffic'])/int(row['Search Volume'])
-    CPC = float(row['CPC'])
-
-    omzet_per_click = CTR * conv * productwaarde
-    return omzet_per_click - CPC
-
 def get_suggested_keywords(keyword_rapport=DBZ, conv=0.03, avg_product_value=100, sv_cutoff=100, ret_cutoff=10):
     profit_values = {}
     volume_values = {}
