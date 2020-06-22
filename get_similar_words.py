@@ -8,8 +8,8 @@ def get_similar_words(woord):
         le_el = instance.les_find_le(sense.get_id())
         if not le_el: raise Exception
         meanings = instance.les_all_les_of_one_synset(le_el.get_synset_id())
-
-        for meaning in meanings[:10]:
-            ret.append(meaning.get_lemma())
+        if le_el.get_synset_id():
+            for meaning in meanings:
+                ret.append(meaning.get_lemma())
 
     return list(set(ret))
