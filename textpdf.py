@@ -8,7 +8,7 @@ from fpdf import FPDF
 
 from fpdf import FPDF
 
-title = 'Social Brothers Adice Report'
+title = 'Social Brothers Advice Report'
 
 class PDF(FPDF):
     def header(self):
@@ -18,9 +18,9 @@ class PDF(FPDF):
         w = self.get_string_width(title) + 6
         self.set_x((210 - w) / 2)
         # Colors of frame, background and text
-        self.set_draw_color(0, 80, 180)
-        self.set_fill_color(230, 230, 0)
-        self.set_text_color(220, 50, 50)
+        self.set_draw_color(0, 000, 000)
+        self.set_fill_color(255,115,0)
+        self.set_text_color(000, 00, 00)
         # Thickness of frame (1 mm)
         self.set_line_width(1)
         # Title
@@ -71,6 +71,7 @@ class PDF(FPDF):
 
 pdf = PDF()
 pdf.set_title(title)
-pdf.set_author('Jules Verne')
-pdf.print_chapter(1, 'A RUNAWAY REEF', 'Berekening.txt')
+pdf.set_author('SB')
+pdf.print_chapter(1, 'Berekening', 'Berekening.txt')
+pdf.print_chapter(2, 'Uitkomsten', 'Berekening.txt')
 pdf.output('Advice.pdf', 'F')
