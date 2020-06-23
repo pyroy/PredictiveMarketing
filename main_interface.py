@@ -167,7 +167,7 @@ class Example(Frame):
         conversion_box = tk.Entry(frame4,textvariable = conversion_value2)
         conversion_box.place(x=158,y=100)
 
-        infobutton = tk.Button(frame4,text="info",bg='lightblue',bitmap="info",command=lambda :window(self,"Here you find a short explenation\n on how to input the entry fields. \n\n Product name: name of the product \n\n Average product value: input in euros \n\n conversion to sale ratio: input in decimals"))
+        infobutton = tk.Button(frame4,text="info",bg='lightblue',bitmap="info",command=lambda :window(self,"Here you find a short explanation\n on how to input the entry fields. \n\n Product name: name of the product \n\n Average profit per sale: input in dollars \n\n conversion to sale ratio: input in decimals"))
         infobutton.place(x=385,y=394)
 
         Runbutton3 = tk.Button(frame4, text="Get Advice",bg="lightgray",fg="black",command=lambda : get_suggested_keywords(conv=(conversion_lead_value.get()*conversion_sale_value.get()), avg_product_value=product_value.get()))
