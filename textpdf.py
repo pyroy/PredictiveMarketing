@@ -72,6 +72,6 @@ class PDF(FPDF):
 pdf = PDF()
 pdf.set_title(title)
 pdf.set_author('SB')
-pdf.print_chapter(1, 'Berekening', 'Berekening.txt')
-pdf.print_chapter(2, 'Uitkomsten', 'Berekening.txt')
+pdf.print_chapter(1, 'Uitkomsten', 'Berekening.txt')
+pdf.print_chapter(2, 'Berekening', 'Berekening.txt')
 pdf.output('Advice.pdf', 'F')
