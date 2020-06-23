@@ -101,7 +101,7 @@ class Example(Frame):
         infobutton.place(x=385,y=394)
 
         Runbutton1 = tk.Button(frame2, text="Get Advice",bg="lightgray",fg="black",command=lambda : get_suggested_keywords(conv=(conversion_lead_value.get()*conversion_sale_value.get()), avg_product_value=product_value.get()))
-        Runbutton1.place(x=143,y=340,height=33,width=120)
+        Runbutton1.place(x=143,y=170,height=33,width=120)
 
         frame3 = tk.Frame(self,bg="lightgray",name="frame3")
         frame3.place(x=5, y=200)
@@ -123,20 +123,20 @@ class Example(Frame):
 
         product_value1 = DoubleVar()
         product_box = tk.Entry(frame3,textvariable = product_value1)
-        product_box.place(x=156,y=60)
+        product_box.place(x=166,y=60)
 
         conversion_label = tk.Label(frame3,text="Conversion to sale ratio:",bg="lightgray",fg="black")
         conversion_label.place(x=10,y=100,height=18)
 
         conversion_value1 = DoubleVar()
         conversion_box = tk.Entry(frame3,textvariable = conversion_value1)
-        conversion_box.place(x=152,y=100)
+        conversion_box.place(x=158,y=100)
 
         infobutton = tk.Button(frame3,text="info",bg='lightblue',bitmap="info",command=lambda :window(self,"Here you find a short explenation\n on how to input the entry fields. \n\n Product name: name of the product \n\n Average product value: input in euros \n\n Conversion to sale ratio: input in decimals"))
         infobutton.place(x=385,y=394)
 
-        Runbutton2 = tk.Button(frame3, text="Run",bg="lightgray",fg="black",command=lambda : get_suggested_keywords(conv=conversion_value1.get(),avg_product_value = product_value1.get()))
-        Runbutton2.place(x=200,y=380,height=25,width=45)
+        Runbutton2 = tk.Button(frame3, text="Get Advice",bg="lightgray",fg="black",command=lambda : get_suggested_keywords(conv=(conversion_lead_value.get()*conversion_sale_value.get()), avg_product_value=product_value.get()))
+        Runbutton2.place(x=143,y=170,height=33,width=120)
 
         frame4 = tk.Frame(self,bg="lightgray",name="frame4")
         frame4.place(x=5, y=200)
@@ -158,20 +158,20 @@ class Example(Frame):
 
         product_value2 = DoubleVar()
         product_box = tk.Entry(frame4,textvariable = product_value2)
-        product_box.place(x=156,y=60)
+        product_box.place(x=166,y=60)
 
         conversion_label = tk.Label(frame4,text="Conversion to sale ratio:",bg="lightgray",fg="black")
         conversion_label.place(x=10,y=100,height=18)
 
         conversion_value2 = DoubleVar()
         conversion_box = tk.Entry(frame4,textvariable = conversion_value2)
-        conversion_box.place(x=152,y=100)
+        conversion_box.place(x=158,y=100)
 
         infobutton = tk.Button(frame4,text="info",bg='lightblue',bitmap="info",command=lambda :window(self,"Here you find a short explenation\n on how to input the entry fields. \n\n Product name: name of the product \n\n Average product value: input in euros \n\n conversion to sale ratio: input in decimals"))
         infobutton.place(x=385,y=394)
 
-        Runbutton3 = tk.Button(frame4, text="Run",bg="lightgray",fg="black",command=lambda : get_suggested_keywords(conv=conversion_value2.get(),avg_product_value = product_value2.get()))
-        Runbutton3.place(x=200,y=380,height=25,width=45)
+        Runbutton3 = tk.Button(frame4, text="Get Advice",bg="lightgray",fg="black",command=lambda : get_suggested_keywords(conv=(conversion_lead_value.get()*conversion_sale_value.get()), avg_product_value=product_value.get()))
+        Runbutton3.place(x=143,y=170,height=33,width=120)
 
         tabControl.place(x=0,y=59.4)
 
@@ -184,7 +184,7 @@ class Example(Frame):
 
 def main():
     root = Tk()
-    root.geometry("400x500")
+    root.geometry("400x300")
     root.resizable(False, False)
     app = Example()
     root.mainloop()
