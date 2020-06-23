@@ -20,7 +20,7 @@ class Example(Frame):
     def initUI(self):
 
         style = ttk.Style()
-        style.theme_create( "SB", parent="alt", settings={"TNotebook": {"configure": {"background":"white","bordercolor":"black"}},"TNotebook.Tab": {"configure": {"padding": [5, 1], "background": "gray","foreground":"black"},"map":       {"foreground":[("selected", "black")],"background": [("selected", "white")],"expand": [("selected", [1, 1, 1, 0])] } } } )
+        style.theme_create( "SB", parent="alt", settings={"TNotebook": {"configure": {"background":"darkred","bordercolor":"black"}},"TNotebook.Tab": {"configure": {"padding": [5, 1], "background": "gray","foreground":"black"},"map":       {"foreground":[("selected", "black")],"background": [("selected", "lightgray")],"expand": [("selected", [1, 1, 1, 0])] } } } )
         style.theme_use("SB")
 
         self.canvas = Canvas(self, width=400, height=500)
