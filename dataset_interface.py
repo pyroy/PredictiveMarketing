@@ -10,7 +10,7 @@ def call_api_related_kw(keyword):
     return DB
 
 # Load in the database
-def get_suggested_keywords(keyword="kw", conv=0.03, avg_product_value=100, sv_cutoff=100, ret_cutoff=10):
+def get_suggested_keywords(keyword="stofzuiger", conv=0.03, avg_product_value=100, sv_cutoff=100, ret_cutoff=10):
     DBZ = call_api_related_kw(keyword)
     profit_values = {}
     volume_values = {}
@@ -32,7 +32,6 @@ def get_suggested_keywords(keyword="kw", conv=0.03, avg_product_value=100, sv_cu
     #sea_suggestions = sorted(k, key = lambda keyword: -profit_values[keyword])
     #seo_suggestions = sorted(k, key = lambda keyword: keydif_values[keyword])
 
-    # Takes search volume into account
     sea_suggestions = sorted(k, key = lambda keyword: -profit_values[keyword]*math.log(volume_values[keyword]))
     seo_suggestions = sorted(k, key = lambda keyword: keydif_values[keyword]*math.log(volume_values[keyword]))
     seo_suggestions = [key_k for key_k in k if keydif_values[key_k] < 80]
@@ -41,3 +40,4 @@ def get_suggested_keywords(keyword="kw", conv=0.03, avg_product_value=100, sv_cu
     # sea_suggestions = sorted(k, key = lambda keyword: -profit_values[keyword]*math.log(volume_values[keyword])/cd_values[keyword])[:cutoff]
     
     return sea_suggestions[:ret_cutoff], seo_suggestions[:ret_cutoff]
+
