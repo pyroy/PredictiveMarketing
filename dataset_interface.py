@@ -5,7 +5,7 @@ from io import StringIO
 KEY = "4c9d22952d099e8099c4f552977deb20"
 
 def call_api_related_kw(keyword):
-    response = requests.get(f"https://api.semrush.com/?type=phrase_related&key={KEY}&phrase={keyword}&export_columns=Ph,Nq,Cp,Co,Nr,Td,Rr,Fk&database=nl&display_limit=10&display_sort=nq_desc&display_filter=%2B|Nq|Lt|1000")
+    response = requests.get(f"https://api.semrush.com/?type=phrase_related&key={KEY}&phrase={keyword}&export_columns=Ph,Nq,Cp,Co,Nr,Td,Rr,Fk&database=nl&display_limit=1000&display_sort=nq_desc&display_filter=%2B|Nq|Lt|1000")
     DB = pandas.read_csv(StringIO(response.text))
     return DB
 
