@@ -1,4 +1,3 @@
-from fpdf import FPDF
 #pdf = FPDF()
 #pdf.add_page()
 #pdf.set_font("Arial", size=10)
@@ -11,6 +10,7 @@ from fpdf import FPDF
 title = 'Social Brothers Advice Report'
 
 class PDF(FPDF):
+
     def header(self):
         # Arial bold 15
         self.set_font('Arial', 'B', 15)
@@ -28,7 +28,7 @@ class PDF(FPDF):
         # Line break
         self.ln(10)
         #image
-        self.image('social_brothers.png', 10, 8, 33)
+        self.image('images\\social_brothers.png', 10, 8, 33)
 
     def footer(self):
         # Position at 1.5 cm from bottom
