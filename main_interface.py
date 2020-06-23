@@ -47,6 +47,10 @@ class Example(Frame):
         frame = Frame(self)
         frame.place(x=300,y=450)
 
+        def display_template(prod,prod_val,conv):
+            suggestions = get_suggested_keywords(avg_product_value=prod_val,conv=conv)
+            
+
         def window(self,txt):
             info_window = tk.Toplevel(bg="darkorange")
             info_window.title("Info")
@@ -56,7 +60,7 @@ class Example(Frame):
             label4.pack()
             info_window.mainloop()
 
-        tabControl = ttk.Notebook(self,height=500,width=400)
+        tabControl = ttk.Notebook(self,height=500,width=400)     
 
         frame2 = tk.Frame(self,bg="darkorange")
         frame2.place(x=5, y=140)
@@ -65,7 +69,7 @@ class Example(Frame):
         bg_label = tk.Label(frame2, image = self.render)
         bg_label.place(x=0, y=0, relwidth=1, relheight=1)
         bg_label.image = self.render
-
+        
         product_name = tk.Label(frame2,text="Product name:",bg="darkorange",fg="black")
         product_name.place(x=0,y=20,height=18)
 
@@ -97,7 +101,7 @@ class Example(Frame):
         infobutton = tk.Button(frame2,text="info",bg='darkorange',bitmap="info",command=lambda :window(self,"Here you find a short explenation\n on how to input the entry fields. \n\n Product name: name of the product \n\n Average product value: input in euros \n\n Conversion to lead ratio: input in decimals \n\n conversion to sale ratio: input in decimals"))
         infobutton.place(x=385,y=394)
 
-        Runbutton1 = tk.Button(frame2, text="Run",bg="darkorange",fg="black",command=lambda : print(get_suggested_keywords(budget=budget_value.get(),conv=conversion_value.get(), avg_product_value=product_value.get())))
+        Runbutton1 = tk.Button(frame2, text="Run",bg="darkorange",fg="black",command=lambda : get_suggested_keywords(conv=(conversion_lead_value.get()*conversion_sale_value.get()), avg_product_value=product_value.get()))
         Runbutton1.place(x=200,y=380,height=25,width=45)
 
         frame3 = tk.Frame(self,bg="darkorange",name="frame3")
@@ -132,12 +136,12 @@ class Example(Frame):
         infobutton = tk.Button(frame3,text="info",bg='darkorange',bitmap="info",command=lambda :window(self,"Here you find a short explenation\n on how to input the entry fields. \n\n Product name: name of the product \n\n Average product value: input in euros \n\n Conversion to sale ratio: input in decimals"))
         infobutton.place(x=385,y=394)
 
-        Runbutton2 = tk.Button(frame3, text="Run",bg="darkorange",fg="black",command=lambda : get_suggested_keywords(budget=budget_value1.get()))
+        Runbutton2 = tk.Button(frame3, text="Run",bg="darkorange",fg="black",command=lambda : get_suggested_keywords(conv=conversion_value1.get(),avg_product_value = product_value1.get()))
         Runbutton2.place(x=200,y=380,height=25,width=45)
 
         frame4 = tk.Frame(self,bg="darkorange",name="frame4")
         frame4.place(x=5, y=200)
-        tabControl.add(frame4, text='Webshop')
+        tabControl.add(frame4, text='Websop')
 
         bg_label = tk.Label(frame4, image = self.render)
         bg_label.place(x=0, y=0, relwidth=1, relheight=1)
@@ -167,7 +171,7 @@ class Example(Frame):
         infobutton = tk.Button(frame4,text="info",bg='darkorange',bitmap="info",command=lambda :window(self,"Here you find a short explenation\n on how to input the entry fields. \n\n Product name: name of the product \n\n Average product value: input in euros \n\n conversion to sale ratio: input in decimals"))
         infobutton.place(x=385,y=394)
 
-        Runbutton3 = tk.Button(frame4, text="Run",bg="darkorange",fg="black",command=lambda : get_suggested_keywords(budget=budget_value.get()))
+        Runbutton3 = tk.Button(frame4, text="Run",bg="darkorange",fg="black",command=lambda : get_suggested_keywords(conv=conversion_value2.get(),avg_product_value = product_value2.get()))
         Runbutton3.place(x=200,y=380,height=25,width=45)
 
         tabControl.place(x=0,y=59.4)
