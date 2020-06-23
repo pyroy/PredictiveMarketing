@@ -112,25 +112,25 @@ class Example(Frame):
         bg_label.image = self.render
 
         product_name = tk.Label(frame3,text="Product name:",bg="lightgray",fg="black")
-        product_name.place(x=0,y=20,height=18)
+        product_name.place(x=10,y=20,height=18)
 
         product_name_value1 = str()
         product_name_box = tk.Entry(frame3,textvariable = product_name_value1)
-        product_name_box.place(x=82,y=20)
+        product_name_box.place(x=102,y=20)
 
         product_label = tk.Label(frame3,text="Average product Value: €",bg="lightgray",fg="black")
-        product_label.place(x=0,y=60,height=18)
+        product_label.place(x=10,y=60,height=18)
 
         product_value1 = DoubleVar()
         product_box = tk.Entry(frame3,textvariable = product_value1)
-        product_box.place(x=136,y=60)
+        product_box.place(x=156,y=60)
 
         conversion_label = tk.Label(frame3,text="Conversion to sale ratio:",bg="lightgray",fg="black")
-        conversion_label.place(x=0,y=100,height=18)
+        conversion_label.place(x=10,y=100,height=18)
 
         conversion_value1 = DoubleVar()
         conversion_box = tk.Entry(frame3,textvariable = conversion_value1)
-        conversion_box.place(x=132,y=100)
+        conversion_box.place(x=152,y=100)
 
         infobutton = tk.Button(frame3,text="info",bg='lightblue',bitmap="info",command=lambda :window(self,"Here you find a short explenation\n on how to input the entry fields. \n\n Product name: name of the product \n\n Average product value: input in euros \n\n Conversion to sale ratio: input in decimals"))
         infobutton.place(x=385,y=394)
@@ -147,25 +147,25 @@ class Example(Frame):
         bg_label.image = self.render
 
         product_name = tk.Label(frame4,text="Product name:",bg="lightgray",fg="black")
-        product_name.place(x=0,y=20,height=18)
+        product_name.place(x=10,y=20,height=18)
 
         product_name_value2 = str()
         product_name_box = tk.Entry(frame4,textvariable = product_name_value2)
-        product_name_box.place(x=82,y=20)
+        product_name_box.place(x=102,y=20)
 
         product_label = tk.Label(frame4,text="Average product Value: €",bg="lightgray",fg="black")
-        product_label.place(x=0,y=60,height=18)
+        product_label.place(x=10,y=60,height=18)
 
         product_value2 = DoubleVar()
         product_box = tk.Entry(frame4,textvariable = product_value2)
-        product_box.place(x=136,y=60)
+        product_box.place(x=156,y=60)
 
         conversion_label = tk.Label(frame4,text="Conversion to sale ratio:",bg="lightgray",fg="black")
-        conversion_label.place(x=0,y=100,height=18)
+        conversion_label.place(x=10,y=100,height=18)
 
         conversion_value2 = DoubleVar()
         conversion_box = tk.Entry(frame4,textvariable = conversion_value2)
-        conversion_box.place(x=132,y=100)
+        conversion_box.place(x=152,y=100)
 
         infobutton = tk.Button(frame4,text="info",bg='lightblue',bitmap="info",command=lambda :window(self,"Here you find a short explenation\n on how to input the entry fields. \n\n Product name: name of the product \n\n Average product value: input in euros \n\n conversion to sale ratio: input in decimals"))
         infobutton.place(x=385,y=394)
