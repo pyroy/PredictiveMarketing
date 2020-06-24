@@ -2,6 +2,7 @@ import tkinter as tk
 import PIL
 import pandas
 import requests
+import subprocess
 
 from PIL import Image, ImageTk
 from tkinter import *
@@ -54,13 +55,15 @@ class Example(Frame):
         def display_template(keywords,prod_val,conv):
             prod_val = EUR_to_USD(prod_val)
             print(prod_val)
-            print(get_suggested_keywords(avg_product_value=prod_val,conv=conv))
             suggestions = get_suggested_keywords(avg_product_value=prod_val,conv=conv)
             print('suggestions',suggestions)
             result = open('Uitkomsten.txt','w')
             L = ['a\n','b\n','c\n']
             result.writelines(L) 
             result.close()
+            import textpdf
+            subprocess.Popen(['Advice.pdf'],shell=True)
+            
 
         def window(self,txt):
             info_window = tk.Toplevel(bg="lightgray")

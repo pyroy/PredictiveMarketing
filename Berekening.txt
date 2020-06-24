@@ -1,0 +1,10 @@
+SEA advertising
+
+winst marge per product = gegeven
+hoeveelheid kliks nodig om 1 product te verkopen = 1/conversion rate
+kosten om 1 product te verkopen = aantal kliks nodig om 1 product te verkopen * kosten per klik
+winst = winst marge per product - kosten om 1 product te verkopen
+
+SEO advertising
+
+Zoek voor keywords met een hoog volume en een zo laag mogelijke keyword difficulty.
