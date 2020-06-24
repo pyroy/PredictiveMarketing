@@ -1,0 +1,30 @@
+Benodigde values: 
+-Cost Per Click
+-CTR
+-Conv
+
+(prijs)Volume * (percentage)CTR * Cost per Click * (percentage)Conv = uitkomst van advertentie (uva) ;D
+
+uva - cpc = winst
+
+voorbeeld nike schoen
+cpc= 0.22
+ctr= 2.5%
+conv = tussen 2 en 4%
+100*0,025*0,22=0.55
+neem conv als 3%
+0,55 * 0,03= 0,0165
+0,0165 - 0,22 = - 0,2035
+
+---
+
+ctr = 0.025
+conv = 0.03
+productwaarde = 100
+omzet per click = 0.025 * 0.03 * 100 = 0.075$
+Cost per click (CPC) = 0.22
+winst marge = 0.075 - 0.22 = -0.145$
+
+formule = 
+CTR * CONVERTION RATIO * PRODUCTWAARDE = OMZET PER CLICK (OMP)
+WINST MARGE = OMP - CPC

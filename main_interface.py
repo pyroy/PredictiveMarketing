@@ -1,12 +1,14 @@
 import tkinter as tk
 import PIL
 import pandas
+import requests
 
 from PIL import Image, ImageTk
 from tkinter import *
 from tkinter import ttk
 from tkinter.ttk import Frame, Button,Radiobutton, Style, Label
 from dataset_interface import get_suggested_keywords
+from exchange_rate import EUR_to_USD
 
 import os
 path = os.path.dirname(os.path.abspath(__file__)) + "\\"
@@ -46,9 +48,19 @@ class Example(Frame):
         frame = Frame(self)
         frame.place(x=300,y=450)
 
-        def display_template(prod,prod_val,conv):
+        def check_result(outcome):
+            return outcome
+
+        def display_template(keywords,prod_val,conv):
+            prod_val = EUR_to_USD(prod_val)
+            print(prod_val)
+            print(get_suggested_keywords(avg_product_value=prod_val,conv=conv))
             suggestions = get_suggested_keywords(avg_product_value=prod_val,conv=conv)
-            
+            print('suggestions',suggestions)
+            result = open('Uitkomsten.txt','w')
+            L = ['a\n','b\n','c\n']
+            result.writelines(L) 
+            result.close()
 
         def window(self,txt):
             info_window = tk.Toplevel(bg="lightgray")
@@ -69,38 +81,39 @@ class Example(Frame):
         bg_label.place(x=0, y=0, relwidth=1, relheight=1)
         bg_label.image = self.render
         
-        product_name = tk.Label(frame2,text="Product name:",bg="lightgray",fg="black")
+        product_name = tk.Label(frame2,text="Product keywords:",bg="lightgray",fg="black")
         product_name.place(x=10,y=20,height=18)
 
-        product_name_value = str()
-        product_name_box = tk.Entry(frame2,textvariable = product_name_value)
-        product_name_box.place(x=102,y=20)
+        product_name_box = tk.Text(frame2, height=4, width=20)
+        product_name_box.place(x=180,y=20)
 
-        product_label = tk.Label(frame2,text="Average profit per sale: ($)",bg="lightgray",fg="black")
-        product_label.place(x=10,y=60,height=18)
+        product_label = tk.Label(frame2,text="Average profit per sale: (€)",bg="lightgray",fg="black")
+        product_label.place(x=10,y=100,height=18)
 
         product_value = DoubleVar()
         product_box = tk.Entry(frame2,textvariable = product_value)
-        product_box.place(x=166,y=60)
+        product_box.place(x=180,y=100,width=165)
 
         conversion_label = tk.Label(frame2,text="Conversion to lead ratio:",bg="lightgray",fg="black")
-        conversion_label.place(x=10,y=100,height=18)
+        conversion_label.place(x=10,y=120,height=18)
 
         conversion_lead_value = DoubleVar()
         conversion_box = tk.Entry(frame2,textvariable = conversion_lead_value)
-        conversion_box.place(x=158,y=100)
+        conversion_box.place(x=180,y=120,width=165)
 
         conversion_label = tk.Label(frame2,text="Lead to sale ratio:",bg="lightgray",fg="black")
         conversion_label.place(x=10,y=140,height=18)
 
         conversion_sale_value = DoubleVar()
         conversion_box = tk.Entry(frame2,textvariable = conversion_sale_value)
-        conversion_box.place(x=115,y=140)
+        conversion_box.place(x=180,y=140,width=165)
 
-        infobutton = tk.Button(frame2,text="info",bg='lightblue',bitmap="info",command=lambda :window(self,"Here you find a short explenation\n on how to input the entry fields. \n\n Product name: name of the product \n\n Average product value: input in euros \n\n Conversion to lead ratio: input in decimals \n\n conversion to sale ratio: input in decimals"))
-        infobutton.place(x=385,y=394)
+        infobutton = tk.Button(frame2,text="info",bg='lightgray',bitmap="info",
+                               command=lambda :window(self,"Here you find a short explenation\n on how to input the entry fields. \n\n Product keywords: keywords which\n best describe the product separated. \n by a comma \n\n Average profit per sale: input in euros. \n\n Conversion to lead ratio: input in decimals. \n\n conversion to sale ratio: input in decimals."))
+        infobutton.place(x=385,y=194)
 
-        Runbutton1 = tk.Button(frame2, text="Get Advice",bg="lightgray",fg="black",command=lambda : get_suggested_keywords(conv=(conversion_lead_value.get()*conversion_sale_value.get()), avg_product_value=product_value.get()))
+        Runbutton1 = tk.Button(frame2, text="Get Advice",bg="lightgray",fg="black",
+                               command=lambda : display_template(keywords=product_name_box.get(1.0, tk.END+"-1c"),conv=(conversion_lead_value.get()*conversion_sale_value.get()), prod_val=product_value.get()))
         Runbutton1.place(x=143,y=170,height=33,width=120)
 
         frame3 = tk.Frame(self,bg="lightgray",name="frame3")
@@ -111,31 +124,32 @@ class Example(Frame):
         bg_label.place(x=0, y=0, relwidth=1, relheight=1)
         bg_label.image = self.render
 
-        product_name = tk.Label(frame3,text="Product name:",bg="lightgray",fg="black")
+        product_name = tk.Label(frame3,text="Product keywords:",bg="lightgray",fg="black")
         product_name.place(x=10,y=20,height=18)
 
-        product_name_value1 = str()
-        product_name_box = tk.Entry(frame3,textvariable = product_name_value1)
-        product_name_box.place(x=102,y=20)
+        product_name_box1 = tk.Text(frame3,height=4,width=20)
+        product_name_box1.place(x=180,y=20)
 
-        product_label = tk.Label(frame3,text="Average profit per sale: ($)",bg="lightgray",fg="black")
-        product_label.place(x=10,y=60,height=18)
+        product_label = tk.Label(frame3,text="Average profit per sale: (€)",bg="lightgray",fg="black")
+        product_label.place(x=10,y=100,height=18)
 
         product_value1 = DoubleVar()
         product_box = tk.Entry(frame3,textvariable = product_value1)
-        product_box.place(x=166,y=60)
+        product_box.place(x=180,y=100,width=165)
 
         conversion_label = tk.Label(frame3,text="Conversion to sale ratio:",bg="lightgray",fg="black")
-        conversion_label.place(x=10,y=100,height=18)
+        conversion_label.place(x=10,y=120,height=18)
 
         conversion_value1 = DoubleVar()
         conversion_box = tk.Entry(frame3,textvariable = conversion_value1)
-        conversion_box.place(x=158,y=100)
+        conversion_box.place(x=180,y=120,width=165)
 
-        infobutton = tk.Button(frame3,text="info",bg='lightblue',bitmap="info",command=lambda :window(self,"Here you find a short explenation\n on how to input the entry fields. \n\n Product name: name of the product \n\n Average product value: input in euros \n\n Conversion to sale ratio: input in decimals"))
-        infobutton.place(x=385,y=394)
+        infobutton = tk.Button(frame3,text="info",bg='lightgray',bitmap="info",
+                               command=lambda :window(self,"Here you find a short explenation\n on how to input the entry fields. \n\n Product keywords: keywords which\n best describe the product separated. \n by a comma. \n\n Average profit per sale: input in euros. \n\n Conversion to sale ratio: input in decimals."))
+        infobutton.place(x=385,y=194)
 
-        Runbutton2 = tk.Button(frame3, text="Get Advice",bg="lightgray",fg="black",command=lambda : get_suggested_keywords(conv=(conversion_lead_value.get()*conversion_sale_value.get()), avg_product_value=product_value.get()))
+        Runbutton2 = tk.Button(frame3, text="Get Advice",bg="lightgray",fg="black",
+                               command=lambda : display_template(keywords=product_name_box1.get(1.0, tk.END+"-1c"),conv=conversion_value1.get(), prod_val=product_value1.get()))
         Runbutton2.place(x=143,y=170,height=33,width=120)
 
         frame4 = tk.Frame(self,bg="lightgray",name="frame4")
@@ -146,31 +160,32 @@ class Example(Frame):
         bg_label.place(x=0, y=0, relwidth=1, relheight=1)
         bg_label.image = self.render
 
-        product_name = tk.Label(frame4,text="Product name:",bg="lightgray",fg="black")
+        product_name = tk.Label(frame4,text="Product keywords:",bg="lightgray",fg="black")
         product_name.place(x=10,y=20,height=18)
 
-        product_name_value2 = str()
-        product_name_box = tk.Entry(frame4,textvariable = product_name_value2)
-        product_name_box.place(x=102,y=20)
+        product_name_box2 = tk.Text(frame4,height=4,width=20)
+        product_name_box2.place(x=180,y=20)
 
-        product_label = tk.Label(frame4,text="Average profit per sale: ($)",bg="lightgray",fg="black")
-        product_label.place(x=10,y=60,height=18)
+        product_label = tk.Label(frame4,text="Average profit per sale: (€)",bg="lightgray",fg="black")
+        product_label.place(x=10,y=100,height=18)
 
         product_value2 = DoubleVar()
         product_box = tk.Entry(frame4,textvariable = product_value2)
-        product_box.place(x=166,y=60)
+        product_box.place(x=180,y=100,width=165)
 
         conversion_label = tk.Label(frame4,text="Conversion to sale ratio:",bg="lightgray",fg="black")
-        conversion_label.place(x=10,y=100,height=18)
+        conversion_label.place(x=10,y=120,height=18)
 
         conversion_value2 = DoubleVar()
         conversion_box = tk.Entry(frame4,textvariable = conversion_value2)
-        conversion_box.place(x=158,y=100)
+        conversion_box.place(x=180,y=120,width=165)
 
-        infobutton = tk.Button(frame4,text="info",bg='lightblue',bitmap="info",command=lambda :window(self,"Here you find a short explanation\n on how to input the entry fields. \n\n Product name: name of the product \n\n Average profit per sale: input in dollars \n\n conversion to sale ratio: input in decimals"))
-        infobutton.place(x=385,y=394)
+        infobutton = tk.Button(frame4,text="info",bg='lightgray',bitmap="info",
+                               command=lambda :window(self,"Here you find a short explanation\n on how to input the entry fields. \n\n Product keywords: keywords which\n best describe the product separated. \n by a comma. \n\n Average profit per sale: input in Euros. \n\n conversion to sale ratio: input in decimals."))
+        infobutton.place(x=385,y=194)
 
-        Runbutton3 = tk.Button(frame4, text="Get Advice",bg="lightgray",fg="black",command=lambda : get_suggested_keywords(conv=(conversion_lead_value.get()*conversion_sale_value.get()), avg_product_value=product_value.get()))
+        Runbutton3 = tk.Button(frame4, text="Get Advice",bg="lightgray",fg="black",
+                               command=lambda : display_template(keywords=product_name_box2.get(1.0, tk.END+"-1c"),conv=conversion_value2.get(), prod_val=product_value2.get()))
         Runbutton3.place(x=143,y=170,height=33,width=120)
 
         tabControl.place(x=0,y=59.4)
