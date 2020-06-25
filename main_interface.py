@@ -49,16 +49,49 @@ class Example(Frame):
         frame = Frame(self)
         frame.place(x=300,y=450)
 
-        def check_result(outcome):
-            return outcome
-
+        def get_result_for_advice(outcome):
+            L = []
+            if len(outcome[0]) > 0 and len(outcome[1]) > 0:
+                L.append('SEA & SEO\n')
+                L.append('Met behulp van de gegevens die u heeft ingevuld is berekend dat u met betaald adverteren winst kan maken met voor uw product relevante keywords.\n')
+                L.append('Hierom raden wij aan om geld te besteden aan betaald adverteren op google. De keywords die wij aanraden zijn als volgt:\n')
+                L.append('  SEA    SEO')
+                for i in range(3):
+                    L.append(' '+str(outcome[0][i]+'   '+str(outcome[1][i])+'\n'))
+                L.append('Deze keywords hebben wij geselecteerd op basis van [mode].\n')
+                L.append('Organisch verkeer naar de website krijgen door middel van SEO lijkt ons ook haalbaar. Dit is omdat de competitie voor de relevante zoektermen laag genoeg is.')
+            elif len(outcome[0]) > 0:
+                L.append('SEA\n')
+                L.append('Met behulp van de gegevens die u heeft ingevuld is berekend dat u met betaald adverteren winst kan maken met voor uw product relevante keywords.\n')
+                L.append('Hierom raden wij aan om geld te besteden aan betaald adverteren op google. De keywords die wij aanraden zijn als volgt:\n')
+                L.append('  SEA  ')
+                for i in range(3):
+                    L.append(' '+str(outcome[0][i])+'\n')
+                L.append('Deze keywords hebben wij geselecteerd op basis van [mode].\n')
+                L.append('Organisch verkeer naar de website krijgen door middel van SEO lijkt ons niet haalbaar. Dit is omdat de competitie voor de relevante zoektermen te hoog is.')
+            elif len(outcome[1]) > 0:
+                L.append('SEO\n')
+                L.append('Met behulp van de gegevens die u heeft ingevuld is berekend dat u met betaald adverteren geen winst kan maken met voor uw product relevante keywords.\n')
+                L.append('Hierom raden wij aan geen geld te besteden aan betaald adverteren op google.')
+                L.append('Deze keywords hebben wij geselecteerd op basis van [mode].\n')
+                L.append('Organisch verkeer naar de website krijgen door middel van SEO lijkt ons wel haalbaar. Dit is omdat de competitie voor de relevante zoektermen laag genoeg is.')
+                L.append('De keywords die wij aanraden zijn als volgt:\n')
+                L.append('  SEO  ')
+                for i in range(3):
+                    L.append(' '+str(outcome[1][i])+'\n')
+            else:
+                L.append('Adverteren op Google niet haalbaar\n')
+                L.append('Met behulp van de gegevens die u heeft ingevuld is berekend dat u met betaald adverteren geen winst kan maken met voor uw product relevante keywords.\n')
+                L.append('Hierom raden wij aan geen geld te besteden aan betaald adverteren op google.')
+                L.append('Organisch verkeer naar de website krijgen door middel van SEO lijkt ons ook niet haalbaar. Dit is omdat de competitie voor de relevante zoektermen te hoog is.')
+                
+                
+            return L
         def display_template(keywords,prod_val,conv):
             prod_val = EUR_to_USD(prod_val)
-            print(prod_val)
             suggestions = get_suggested_keywords(avg_product_value=prod_val,conv=conv)
-            print('suggestions',suggestions)
             result = open('Uitkomsten.txt','w')
-            L = ['a\n','b\n','c\n']
+            L = get_result_for_advice(suggestions)
             result.writelines(L) 
             result.close()
             import textpdf
@@ -116,7 +149,9 @@ class Example(Frame):
         infobutton.place(x=385,y=194)
 
         Runbutton1 = tk.Button(frame2, text="Get Advice",bg="lightgray",fg="black",
-                               command=lambda : display_template(keywords=product_name_box.get(1.0, tk.END+"-1c"),conv=(conversion_lead_value.get()*conversion_sale_value.get()), prod_val=product_value.get()))
+                               command=lambda : display_template(keywords=product_name_box.get(1.0, tk.END+"-1c"),
+                                                                 conv=(conversion_lead_value.get()*conversion_sale_value.get()),
+                                                                 prod_val=product_value.get()))
         Runbutton1.place(x=143,y=170,height=33,width=120)
 
         frame3 = tk.Frame(self,bg="lightgray",name="frame3")
@@ -152,12 +187,14 @@ class Example(Frame):
         infobutton.place(x=385,y=194)
 
         Runbutton2 = tk.Button(frame3, text="Get Advice",bg="lightgray",fg="black",
-                               command=lambda : display_template(keywords=product_name_box1.get(1.0, tk.END+"-1c"),conv=conversion_value1.get(), prod_val=product_value1.get()))
+                               command=lambda : display_template(keywords=product_name_box1.get(1.0, tk.END+"-1c"),
+                                                                 conv=conversion_value1.get(),
+                                                                 prod_val=product_value1.get()))
         Runbutton2.place(x=143,y=170,height=33,width=120)
 
         frame4 = tk.Frame(self,bg="lightgray",name="frame4")
         frame4.place(x=5, y=200)
-        tabControl.add(frame4, text='Websop')
+        tabControl.add(frame4, text='Webshop')
 
         bg_label = tk.Label(frame4, image = self.render)
         bg_label.place(x=0, y=0, relwidth=1, relheight=1)
@@ -188,17 +225,12 @@ class Example(Frame):
         infobutton.place(x=385,y=194)
 
         Runbutton3 = tk.Button(frame4, text="Get Advice",bg="lightgray",fg="black",
-                               command=lambda : display_template(keywords=product_name_box2.get(1.0, tk.END+"-1c"),conv=conversion_value2.get(), prod_val=product_value2.get()))
+                               command=lambda : display_template(keywords=product_name_box2.get(1.0, tk.END+"-1c"),
+                                                                 conv=conversion_value2.get(),
+                                                                 prod_val=product_value2.get()))
         Runbutton3.place(x=143,y=170,height=33,width=120)
 
         tabControl.place(x=0,y=59.4)
-
-        #self.label2 = tk.Label(frame3,text="Business type:",bg="darkorange",fg="black")
-        #self.label2.place(x=0,y=20,height=18)
-
-        #business_type = ttk.Combobox(frame3,state="readonly", values=["B2B", "B2C","Webshop"])
-        #business_type.place(x=80,y=20)
-        #business_type.current(0)
 
 def main():
     root = Tk()
