@@ -1,3 +1,10 @@
+#pdf = FPDF()
+#pdf.add_page()
+#pdf.set_font("Arial", size=10)
+#pdf.cell(100,100, txt= "Social Brothers Advice Report", ln=1, align = "C")
+
+#pdf.output("Advice.pdf")
+
 from fpdf import FPDF
 
 title = 'Social Brothers Advice Report'
@@ -65,6 +72,6 @@ class PDF(FPDF):
 pdf = PDF()
 pdf.set_title(title)
 pdf.set_author('SB')
-pdf.print_chapter(1, 'Uitkomsten', 'sea_seo.txt')
+pdf.print_chapter(1, 'Uitkomsten', 'Uitkomsten.txt')
 pdf.print_chapter(2, 'Berekening', 'Berekening.txt')
 pdf.output('Advice.pdf', 'F')
