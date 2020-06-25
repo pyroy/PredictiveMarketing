@@ -51,25 +51,27 @@ class Example(Frame):
 
         def get_result_for_advice(outcome):
             L = []
-            if len(outcome[0]) > 0 and len(outcome[1]) > 0:
+            SEA = outcome[0]
+            SEO = outcome[1]
+            if len(SEA) > 0 and len(SEO) > 0:
                 L.append('SEA & SEO\n')
                 L.append('Met behulp van de gegevens die u heeft ingevuld is berekend dat u met betaald adverteren winst kan maken met voor uw product relevante keywords.\n')
                 L.append('Hierom raden wij aan om geld te besteden aan betaald adverteren op google. De keywords die wij aanraden zijn als volgt:\n')
                 L.append('  SEA    SEO')
                 for i in range(3):
-                    L.append(' '+str(outcome[0][i]+'   '+str(outcome[1][i])+'\n'))
+                    L.append(' '+str(SEA[i]+'   '+str(SEO[i])+'\n'))
                 L.append('Deze keywords hebben wij geselecteerd op basis van [mode].\n')
                 L.append('Organisch verkeer naar de website krijgen door middel van SEO lijkt ons ook haalbaar. Dit is omdat de competitie voor de relevante zoektermen laag genoeg is.')
-            elif len(outcome[0]) > 0:
+            elif len(SEA) > 0:
                 L.append('SEA\n')
                 L.append('Met behulp van de gegevens die u heeft ingevuld is berekend dat u met betaald adverteren winst kan maken met voor uw product relevante keywords.\n')
                 L.append('Hierom raden wij aan om geld te besteden aan betaald adverteren op google. De keywords die wij aanraden zijn als volgt:\n')
                 L.append('  SEA  ')
                 for i in range(3):
-                    L.append(' '+str(outcome[0][i])+'\n')
+                    L.append(' '+str(SEA[i])+'\n')
                 L.append('Deze keywords hebben wij geselecteerd op basis van [mode].\n')
                 L.append('Organisch verkeer naar de website krijgen door middel van SEO lijkt ons niet haalbaar. Dit is omdat de competitie voor de relevante zoektermen te hoog is.')
-            elif len(outcome[1]) > 0:
+            elif len(SEO) > 0:
                 L.append('SEO\n')
                 L.append('Met behulp van de gegevens die u heeft ingevuld is berekend dat u met betaald adverteren geen winst kan maken met voor uw product relevante keywords.\n')
                 L.append('Hierom raden wij aan geen geld te besteden aan betaald adverteren op google.')
@@ -78,15 +80,14 @@ class Example(Frame):
                 L.append('De keywords die wij aanraden zijn als volgt:\n')
                 L.append('  SEO  ')
                 for i in range(3):
-                    L.append(' '+str(outcome[1][i])+'\n')
+                    L.append(' '+str(SEO[i])+'\n')
             else:
                 L.append('Adverteren op Google niet haalbaar\n')
                 L.append('Met behulp van de gegevens die u heeft ingevuld is berekend dat u met betaald adverteren geen winst kan maken met voor uw product relevante keywords.\n')
                 L.append('Hierom raden wij aan geen geld te besteden aan betaald adverteren op google.')
                 L.append('Organisch verkeer naar de website krijgen door middel van SEO lijkt ons ook niet haalbaar. Dit is omdat de competitie voor de relevante zoektermen te hoog is.')
-
-
             return L
+        
         def display_template(keywords,prod_val,conv):
             prod_val = EUR_to_USD(prod_val)
             suggestions = get_suggested_keywords(avg_product_value=prod_val,conv=conv)
