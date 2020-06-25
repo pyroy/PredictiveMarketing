@@ -146,7 +146,7 @@ class Example(Frame):
         conversion_box.place(x=180,y=140,width=165)
 
         infobutton = tk.Button(frame2,text="info",bg='lightgray',bitmap="info",
-                               command=lambda :window(self,"Here you find a short explenation\n on how to input the entry fields. \n\n Product keywords: keywords which\n best describe the product separated. \n by a comma \n\n Average profit per sale: input in euros. \n\n Conversion to lead ratio: input in decimals. \n\n Conversion to sale ratio: input in decimals."))
+                               command=lambda :window(self,"Here you find a short explanation\n on how to input the entry fields. \n\n Product keywords: keywords which\n best describe the product separated. \n by a comma \n\n Average profit per sale: input in euros. \n\n Conversion to lead ratio: input in decimals. \n\n Conversion to sale ratio: input in decimals."))
         infobutton.place(x=385,y=194)
 
         Runbutton1 = tk.Button(frame2, text="Get Advice",bg="lightgray",fg="black",
