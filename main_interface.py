@@ -10,6 +10,8 @@ from tkinter import ttk
 from tkinter.ttk import Frame, Button,Radiobutton, Style, Label
 from dataset_interface import get_suggested_keywords
 from exchange_rate import EUR_to_USD
+from textpdf import PDF
+from fpdf import FPDF
 
 import os
 path = os.path.dirname(os.path.abspath(__file__)) + "\\"
@@ -50,52 +52,61 @@ class Example(Frame):
         frame.place(x=300,y=450)
 
         def get_result_for_advice(outcome):
-            L = []
+            L = str()
             SEA = outcome[0]
             SEO = outcome[1]
             if len(SEA) > 0 and len(SEO) > 0:
-                L.append('SEA & SEO\n')
-                L.append('Met behulp van de gegevens die u heeft ingevuld is berekend dat u met betaald adverteren winst kan maken met voor uw product relevante keywords.\n')
-                L.append('Hierom raden wij aan om geld te besteden aan betaald adverteren op google. De keywords die wij aanraden zijn als volgt:\n')
-                L.append('  SEA    SEO')
+                L +=('SEA & SEO\n')
+                L +=('Met behulp van de gegevens die u heeft ingevuld is berekend dat u met betaald adverteren winst kan maken met voor uw product relevante keywords.\n')
+                L +=('Hierom raden wij aan om geld te besteden aan betaald adverteren op google. De keywords die wij aanraden voor SEA zijn als volgt:\n\n')
                 for i in range(3):
-                    L.append(' '+str(SEA[i]+'   '+str(SEO[i])+'\n'))
-                L.append('Deze keywords hebben wij geselecteerd op basis van [mode].\n')
-                L.append('Organisch verkeer naar de website krijgen door middel van SEO lijkt ons ook haalbaar. Dit is omdat de competitie voor de relevante zoektermen laag genoeg is.')
+                    if i < len(SEA):
+                        L +=(str(SEA[i])+'\n')
+                L +=('\n')
+                L +=('Deze keywords hebben wij geselecteerd op basis van de winst per product en het zoekvolume van het keyword.\n')
+                L +=('Organisch verkeer naar de website krijgen door middel van SEO lijkt ons ook haalbaar. Dit is omdat de competitie voor de relevante zoektermen laag genoeg is. De aangeraden keywords zijn als volgt:\n\n')
+                L +=('         SEO\n')
+                for i in range(3):
+                    if i < len(SEO):
+                        L +=(str(SEO[i])+'\n')
+                L +=('\n')
             elif len(SEA) > 0:
-                L.append('SEA\n')
-                L.append('Met behulp van de gegevens die u heeft ingevuld is berekend dat u met betaald adverteren winst kan maken met voor uw product relevante keywords.\n')
-                L.append('Hierom raden wij aan om geld te besteden aan betaald adverteren op google. De keywords die wij aanraden zijn als volgt:\n')
-                L.append('  SEA  ')
+                L +=('SEA\n')
+                L +=('Met behulp van de gegevens die u heeft ingevuld is berekend dat u met betaald adverteren winst kan maken met voor uw product relevante keywords.\n')
+                L +=('Hierom raden wij aan om geld te besteden aan betaald adverteren op google. De keywords die wij aanraden voor SEA zijn als volgt:\n\n')
                 for i in range(3):
-                    L.append(' '+str(SEA[i])+'\n')
-                L.append('Deze keywords hebben wij geselecteerd op basis van [mode].\n')
-                L.append('Organisch verkeer naar de website krijgen door middel van SEO lijkt ons niet haalbaar. Dit is omdat de competitie voor de relevante zoektermen te hoog is.')
+                    if i < len(SEA):
+                        L +=(str(SEA[i])+'\n')
+                L +=('\n')
+                L +=('Deze keywords hebben wij geselecteerd op basis van de winst per product en het zoekvolume van het keyword.\n')
+                L +=('Organisch verkeer naar de website krijgen door middel van SEO lijkt ons niet haalbaar. Dit is omdat de competitie voor de relevante zoektermen te hoog is.')
             elif len(SEO) > 0:
-                L.append('SEO\n')
-                L.append('Met behulp van de gegevens die u heeft ingevuld is berekend dat u met betaald adverteren geen winst kan maken met voor uw product relevante keywords.\n')
-                L.append('Hierom raden wij aan geen geld te besteden aan betaald adverteren op google.')
-                L.append('Deze keywords hebben wij geselecteerd op basis van [mode].\n')
-                L.append('Organisch verkeer naar de website krijgen door middel van SEO lijkt ons wel haalbaar. Dit is omdat de competitie voor de relevante zoektermen laag genoeg is.')
-                L.append('De keywords die wij aanraden zijn als volgt:\n')
-                L.append('  SEO  ')
+                L +=('SEO\n')
+                L +=('Met behulp van de gegevens die u heeft ingevuld is berekend dat u met betaald adverteren geen winst kan maken met voor uw product relevante keywords.\n')
+                L +=('Hierom raden wij aan geen geld te besteden aan betaald adverteren op google.')
+                L +=('Organisch verkeer naar de website krijgen door middel van SEO lijkt ons wel haalbaar. Dit is omdat de competitie voor de relevante zoektermen laag genoeg is.')
+                L +=('De keywords die wij aanraden zijn gekozen op basis van de winst per product en het zoekvolume van het keyword.\n')
+                L +=('De aangeraden keywords voor SEO zijn als volgt:\n\n')
                 for i in range(3):
-                    L.append(' '+str(SEO[i])+'\n')
+                    if i < len(SEO):
+                        L +=(str(SEO[i])+'\n')
+                L +=('\n')
             else:
-                L.append('Adverteren op Google niet haalbaar\n')
-                L.append('Met behulp van de gegevens die u heeft ingevuld is berekend dat u met betaald adverteren geen winst kan maken met voor uw product relevante keywords.\n')
-                L.append('Hierom raden wij aan geen geld te besteden aan betaald adverteren op google.')
-                L.append('Organisch verkeer naar de website krijgen door middel van SEO lijkt ons ook niet haalbaar. Dit is omdat de competitie voor de relevante zoektermen te hoog is.')
+                L +=('Adverteren op Google niet haalbaar\n')
+                L +=('Met behulp van de gegevens die u heeft ingevuld is berekend dat u met betaald adverteren geen winst kan maken met voor uw product relevante keywords.\n')
+                L +=('Hierom raden wij aan geen geld te besteden aan betaald adverteren op google.')
+                L +=('Organisch verkeer naar de website krijgen door middel van SEO lijkt ons ook niet haalbaar. Dit is omdat de competitie voor de relevante zoektermen te hoog is.')
             return L
         
         def display_template(keywords,prod_val,conv):
             prod_val = EUR_to_USD(prod_val)
             suggestions = get_suggested_keywords(avg_product_value=prod_val,conv=conv)
-            result = open('Uitkomsten.txt','w')
             L = get_result_for_advice(suggestions)
-            result.writelines(L)
-            result.close()
-            import textpdf
+            pdf = PDF()
+            pdf.set_title('Social Brothers Advice Report')
+            pdf.set_author('SB')
+            pdf.print_chapter(1, 'Uitkomsten', L)
+            pdf.output('Advice.pdf', 'F')
             subprocess.Popen(['Advice.pdf'],shell=True)
 
 
@@ -118,35 +129,35 @@ class Example(Frame):
         bg_label.place(x=0, y=0, relwidth=1, relheight=1)
         bg_label.image = self.render
 
-        product_name = tk.Label(frame2,text="Product keywords:",bg="lightgray",fg="black")
+        product_name = tk.Label(frame2,text="Product name:",bg="lightgray",fg="black")
         product_name.place(x=10,y=20,height=18)
 
-        product_name_box = tk.Text(frame2, height=4, width=20)
+        product_name_box = tk.Text(frame2, height=1, width=20)
         product_name_box.place(x=180,y=20)
 
         product_label = tk.Label(frame2,text="Average profit per sale: (€)",bg="lightgray",fg="black")
-        product_label.place(x=10,y=100,height=18)
+        product_label.place(x=10,y=50,height=18)
 
         product_value = DoubleVar()
         product_box = tk.Entry(frame2,textvariable = product_value)
-        product_box.place(x=180,y=100,width=165)
+        product_box.place(x=180,y=50,width=165)
 
         conversion_label = tk.Label(frame2,text="Conversion to lead ratio:",bg="lightgray",fg="black")
-        conversion_label.place(x=10,y=120,height=18)
+        conversion_label.place(x=10,y=80,height=18)
 
         conversion_lead_value = DoubleVar()
         conversion_box = tk.Entry(frame2,textvariable = conversion_lead_value)
-        conversion_box.place(x=180,y=120,width=165)
+        conversion_box.place(x=180,y=80,width=165)
 
         conversion_label = tk.Label(frame2,text="Lead to sale ratio:",bg="lightgray",fg="black")
-        conversion_label.place(x=10,y=140,height=18)
+        conversion_label.place(x=10,y=110,height=18)
 
         conversion_sale_value = DoubleVar()
         conversion_box = tk.Entry(frame2,textvariable = conversion_sale_value)
-        conversion_box.place(x=180,y=140,width=165)
+        conversion_box.place(x=180,y=110,width=165)
 
         infobutton = tk.Button(frame2,text="info",bg='lightgray',bitmap="info",
-                               command=lambda :window(self,"Here you find a short explenation\n on how to input the entry fields. \n\n Product keywords: keywords which\n best describe the product separated. \n by a comma \n\n Average profit per sale: input in euros. \n\n Conversion to lead ratio: input in decimals. \n\n Conversion to sale ratio: input in decimals."))
+                               command=lambda :window(self,"Here you find a short explanation\n on how to input the entry fields. \n\n Product name: keyword which\n best describes the product i.e. \n stofzuiger or koelkast\n\n Average profit per sale: input in euros. \n\n Conversion to lead ratio: input in decimals. \n\n Conversion to sale ratio: input in decimals."))
         infobutton.place(x=385,y=194)
 
         Runbutton1 = tk.Button(frame2, text="Get Advice",bg="lightgray",fg="black",
@@ -163,28 +174,28 @@ class Example(Frame):
         bg_label.place(x=0, y=0, relwidth=1, relheight=1)
         bg_label.image = self.render
 
-        product_name = tk.Label(frame3,text="Product keywords:",bg="lightgray",fg="black")
+        product_name = tk.Label(frame3,text="Product name:",bg="lightgray",fg="black")
         product_name.place(x=10,y=20,height=18)
 
-        product_name_box1 = tk.Text(frame3,height=4,width=20)
+        product_name_box1 = tk.Text(frame3,height=1,width=20)
         product_name_box1.place(x=180,y=20)
 
         product_label = tk.Label(frame3,text="Average profit per sale: (€)",bg="lightgray",fg="black")
-        product_label.place(x=10,y=100,height=18)
+        product_label.place(x=10,y=50,height=18)
 
         product_value1 = DoubleVar()
         product_box = tk.Entry(frame3,textvariable = product_value1)
-        product_box.place(x=180,y=100,width=165)
+        product_box.place(x=180,y=50,width=165)
 
         conversion_label = tk.Label(frame3,text="Conversion to sale ratio:",bg="lightgray",fg="black")
-        conversion_label.place(x=10,y=120,height=18)
+        conversion_label.place(x=10,y=80,height=18)
 
         conversion_value1 = DoubleVar()
         conversion_box = tk.Entry(frame3,textvariable = conversion_value1)
-        conversion_box.place(x=180,y=120,width=165)
+        conversion_box.place(x=180,y=80,width=165)
 
         infobutton = tk.Button(frame3,text="info",bg='lightgray',bitmap="info",
-                               command=lambda :window(self,"Here you find a short explenation\n on how to input the entry fields. \n\n Product keywords: keywords which\n best describe the product separated. \n by a comma. \n\n Average profit per sale: input in euros. \n\n Conversion to sale ratio: input in decimals."))
+                               command=lambda :window(self,"Here you find a short explanation\n on how to input the entry fields. \n\n Product keywords: keywords which\n best describe the product separated. \n by a comma. \n\n Average profit per sale: input in euros. \n\n Conversion to sale ratio: input in decimals."))
         infobutton.place(x=385,y=194)
 
         Runbutton2 = tk.Button(frame3, text="Get Advice",bg="lightgray",fg="black",
@@ -201,28 +212,28 @@ class Example(Frame):
         bg_label.place(x=0, y=0, relwidth=1, relheight=1)
         bg_label.image = self.render
 
-        product_name = tk.Label(frame4,text="Product keywords:",bg="lightgray",fg="black")
+        product_name = tk.Label(frame4,text="Product name:",bg="lightgray",fg="black")
         product_name.place(x=10,y=20,height=18)
 
-        product_name_box2 = tk.Text(frame4,height=4,width=20)
+        product_name_box2 = tk.Text(frame4,height=1,width=20)
         product_name_box2.place(x=180,y=20)
 
         product_label = tk.Label(frame4,text="Average profit per sale: (€)",bg="lightgray",fg="black")
-        product_label.place(x=10,y=100,height=18)
+        product_label.place(x=10,y=50,height=18)
 
         product_value2 = DoubleVar()
         product_box = tk.Entry(frame4,textvariable = product_value2)
-        product_box.place(x=180,y=100,width=165)
+        product_box.place(x=180,y=50,width=165)
 
         conversion_label = tk.Label(frame4,text="Conversion to sale ratio:",bg="lightgray",fg="black")
-        conversion_label.place(x=10,y=120,height=18)
+        conversion_label.place(x=10,y=80,height=18)
 
         conversion_value2 = DoubleVar()
         conversion_box = tk.Entry(frame4,textvariable = conversion_value2)
-        conversion_box.place(x=180,y=120,width=165)
+        conversion_box.place(x=180,y=80,width=165)
 
         infobutton = tk.Button(frame4,text="info",bg='lightgray',bitmap="info",
-                               command=lambda :window(self,"Here you find a short explanation\n on how to input the entry fields. \n\n Product keywords: keywords which\n best describe the product separated. \n by a comma. \n\n Average profit per sale: input in Euros. \n\n conversion to sale ratio: input in decimals."))
+                               command=lambda :window(self,"Here you find a short explanation\n on how to input the entry fields. \n\n Product name: keyword which\n best describes the product i.e. \n stofzuiger or koelkast\n\n Average profit per sale: input in Euros. \n\n conversion to sale ratio: input in decimals."))
         infobutton.place(x=385,y=194)
 
         Runbutton3 = tk.Button(frame4, text="Get Advice",bg="lightgray",fg="black",

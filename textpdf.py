@@ -51,13 +51,10 @@ class PDF(FPDF):
         self.ln(4)
 
     def chapter_body(self, name):
-        # Read text file
-        with open(name, 'rb') as fh:
-            txt = fh.read().decode('latin-1')
         # Times 12
         self.set_font('Times', '', 12)
         # Output justified text
-        self.multi_cell(0, 5, txt)
+        self.multi_cell(0, 5, name)
         # Line break
         self.ln()
         # Mention in italics
