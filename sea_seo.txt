@@ -1,0 +1,27 @@
+als keywords ingevuld:
+
+[SEA/SEO]
+
+Met behulp van de gegevens die U heeft ingevuld is berekent dat U [.../geen] winst kan maken met de keywords die U heeft aangegeven en andere relevante keywords. Hierom raden wij aan om 
+ (als winst:) wel geld te besteden aan betaald adverteren op google. De keywords die wij aanraden zijn als volgt
+-keywords1
+-keyword2
+etc.
+
+Deze keywords hebben wij geselecteerd op basis van [mode].
+
+ (als verlies) geen geld te besteden aan betaald adverteren op google. 
+
+als geen keywords ingevuld:
+
+[SEA/SEO]
+
+Met behulp van de gegevens die U heeft ingevuld is berekent dat U [.../geen] winst kan maken met de relevante keywords die wij gevonden hebben. Hierom raden wij aan om 
+ (als winst:) wel geld te besteden aan betaald adverteren op google. De keywords die wij aanraden zijn als volgt
+-keywords1
+-keyword2
+etc.
+
+Deze keywords hebben wij geselecteerd op basis van [mode].
+
+ (als verlies) geen geld te besteden aan betaald adverteren op google. 
