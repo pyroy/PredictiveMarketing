@@ -25,10 +25,11 @@ def get_suggested_keywords(keyword="stofzuiger", conv=0.03, avg_product_value=10
         if int(row['Volume']) < sv_cutoff: continue
         if int(row['Number of Results']) == 0: continue
         profit = avg_product_value - int(1/conv) * float(row['CPC (USD)'])
-        profit_values[row['Keyword']] = profit
-        volume_values[row['Keyword']] = int(row['Volume'])
-        keydif_values[row['Keyword']] = float(row['Keyword Difficulty'])
-        k.append(row['Keyword'])
+        if profit > 0:
+            profit_values[row['Keyword']] = profit
+            volume_values[row['Keyword']] = int(row['Volume'])
+            keydif_values[row['Keyword']] = float(row['Keyword Difficulty'])
+            k.append(row['Keyword'])
 
     #sea_suggestions = sorted(k, key = lambda keyword: -profit_values[keyword])
     #seo_suggestions = sorted(k, key = lambda keyword: keydif_values[keyword])
