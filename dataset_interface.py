@@ -10,14 +10,14 @@ def call_api_related_kw(keyword):
     DB = pandas.read_csv(StringIO(response.text))
     return DB
 
-# with open("Datasets/stofzuiger.pydb", "rb") as db:
-#    DBZ = pickle.load(db)
+with open("Datasets/stofzuiger.pydb", "rb") as db:
+    DBZ = pickle.load(db)
 
 # Load in the database
 def get_suggested_keywords(keyword="stofzuiger", conv=0.03, avg_product_value=100, sv_cutoff=100, ret_cutoff=10):
     # comment the line below to get the stofzuiger database
     # also uncomment the pickle load
-    DBZ = call_api_related_kw(keyword)
+    # DBZ = call_api_related_kw(keyword)
     profit_values = {}
     volume_values = {}
     keydif_values = {}
