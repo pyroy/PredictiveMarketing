@@ -84,19 +84,19 @@ class Example(Frame):
                 L.append('Met behulp van de gegevens die u heeft ingevuld is berekend dat u met betaald adverteren geen winst kan maken met voor uw product relevante keywords.\n')
                 L.append('Hierom raden wij aan geen geld te besteden aan betaald adverteren op google.')
                 L.append('Organisch verkeer naar de website krijgen door middel van SEO lijkt ons ook niet haalbaar. Dit is omdat de competitie voor de relevante zoektermen te hoog is.')
-                
-                
+
+
             return L
         def display_template(keywords,prod_val,conv):
             prod_val = EUR_to_USD(prod_val)
             suggestions = get_suggested_keywords(avg_product_value=prod_val,conv=conv)
             result = open('Uitkomsten.txt','w')
             L = get_result_for_advice(suggestions)
-            result.writelines(L) 
+            result.writelines(L)
             result.close()
             import textpdf
             subprocess.Popen(['Advice.pdf'],shell=True)
-            
+
 
         def window(self,txt):
             info_window = tk.Toplevel(bg="lightgray")
@@ -107,7 +107,7 @@ class Example(Frame):
             label4.pack()
             info_window.mainloop()
 
-        tabControl = ttk.Notebook(self,height=500,width=400)     
+        tabControl = ttk.Notebook(self,height=500,width=400)
 
         frame2 = tk.Frame(self,bg="gray")
         frame2.place(x=5, y=140)
@@ -116,7 +116,7 @@ class Example(Frame):
         bg_label = tk.Label(frame2, image = self.render)
         bg_label.place(x=0, y=0, relwidth=1, relheight=1)
         bg_label.image = self.render
-        
+
         product_name = tk.Label(frame2,text="Product keywords:",bg="lightgray",fg="black")
         product_name.place(x=10,y=20,height=18)
 
@@ -145,7 +145,7 @@ class Example(Frame):
         conversion_box.place(x=180,y=140,width=165)
 
         infobutton = tk.Button(frame2,text="info",bg='lightgray',bitmap="info",
-                               command=lambda :window(self,"Here you find a short explenation\n on how to input the entry fields. \n\n Product keywords: keywords which\n best describe the product separated. \n by a comma \n\n Average profit per sale: input in euros. \n\n Conversion to lead ratio: input in decimals. \n\n conversion to sale ratio: input in decimals."))
+                               command=lambda :window(self,"Here you find a short explenation\n on how to input the entry fields. \n\n Product keywords: keywords which\n best describe the product separated. \n by a comma \n\n Average profit per sale: input in euros. \n\n Conversion to lead ratio: input in decimals. \n\n Conversion to sale ratio: input in decimals."))
         infobutton.place(x=385,y=194)
 
         Runbutton1 = tk.Button(frame2, text="Get Advice",bg="lightgray",fg="black",
