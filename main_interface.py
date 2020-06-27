@@ -246,6 +246,7 @@ class Example(Frame):
 
 def main():
     root = Tk()
+    root.wm_iconbitmap('images\\sb.ico')
     root.geometry("400x300")
     root.resizable(False, False)
     app = Example()
