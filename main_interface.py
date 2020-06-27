@@ -100,7 +100,7 @@ class Example(Frame):
         
         def display_template(keywords,prod_val,conv):
             prod_val = EUR_to_USD(prod_val)
-            suggestions = get_suggested_keywords(avg_product_value=prod_val,conv=conv)
+            suggestions = get_suggested_keywords(keyword=keywords,avg_product_value=prod_val,conv=conv)
             L = get_result_for_advice(suggestions)
             pdf = PDF()
             pdf.set_title('Social Brothers Advice Report')
@@ -246,7 +246,6 @@ class Example(Frame):
 
 def main():
     root = Tk()
-    root.wm_iconbitmap('images\\sb.ico')
     root.geometry("400x300")
     root.resizable(False, False)
     app = Example()
