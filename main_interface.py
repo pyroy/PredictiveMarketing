@@ -95,7 +95,7 @@ class Example(Frame):
             else:
                 L +=('Adverteren op Google niet haalbaar\n')
                 L +=('Met behulp van de gegevens die u heeft ingevuld is berekend dat u met betaald adverteren geen winst kan maken met voor uw product relevante keywords.\n')
-                L +=('Hierom raden wij aan geen geld te besteden aan betaald adverteren op google.')
+                L +=('Hierom raden wij aan geen geld te besteden aan betaald adverteren op google.\n')
                 if check == True:
                     L +=('Organisch verkeer naar de website krijgen door middel van SEO lijkt ons ook niet haalbaar. Dit is omdat de competitie voor de relevante zoektermen te hoog is.')
             return L
@@ -103,7 +103,7 @@ class Example(Frame):
         def display_template(keywords,prod_val,conv,check):
             prod_val = EUR_to_USD(prod_val)
             suggestions = get_suggested_keywords(keyword=keywords,avg_product_value=prod_val,conv=conv,check_seo=bool(check))
-            L = get_result_for_advice(suggestions)
+            L = get_result_for_advice(suggestions,check)
             pdf = PDF()
             pdf.set_title('Social Brothers Advice Report')
             pdf.set_author('SB')
