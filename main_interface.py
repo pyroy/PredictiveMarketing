@@ -98,9 +98,9 @@ class Example(Frame):
                 L +=('Organisch verkeer naar de website krijgen door middel van SEO lijkt ons ook niet haalbaar. Dit is omdat de competitie voor de relevante zoektermen te hoog is.')
             return L
         
-        def display_template(keywords,prod_val,conv):
+        def display_template(keywords,prod_val,conv,check):
             prod_val = EUR_to_USD(prod_val)
-            suggestions = get_suggested_keywords(keyword=keywords,avg_product_value=prod_val,conv=conv)
+            suggestions = get_suggested_keywords(keyword=keywords,avg_product_value=prod_val,conv=conv,check_seo=bool(check))
             L = get_result_for_advice(suggestions)
             pdf = PDF()
             pdf.set_title('Social Brothers Advice Report')
@@ -156,6 +156,10 @@ class Example(Frame):
         conversion_box = tk.Entry(frame2,textvariable = conversion_sale_value)
         conversion_box.place(x=180,y=110,width=165)
 
+        check = IntVar()
+        SEO_check = tk.Checkbutton(frame2, text="Enable SEO advice",bg="lightgray", variable=check)
+        SEO_check.place(x=10,y=140,height=18)
+
         infobutton = tk.Button(frame2,text="info",bg='lightgray',bitmap="info",
                                command=lambda :window(self,"Here you find a short explanation\n on how to input the entry fields. \n\n Product name: keyword which\n best describes the product i.e. \n stofzuiger or koelkast\n\n Average profit per sale: input in euros. \n\n Conversion to lead ratio: input in decimals. \n\n Conversion to sale ratio: input in decimals."))
         infobutton.place(x=385,y=194)
@@ -163,7 +167,8 @@ class Example(Frame):
         Runbutton1 = tk.Button(frame2, text="Get Advice",bg="lightgray",fg="black",
                                command=lambda : display_template(keywords=product_name_box.get(1.0, tk.END+"-1c"),
                                                                  conv=(conversion_lead_value.get()*conversion_sale_value.get()),
-                                                                 prod_val=product_value.get()))
+                                                                 prod_val=product_value.get(),
+                                                                 check=check.get()))
         Runbutton1.place(x=143,y=170,height=33,width=120)
 
         frame3 = tk.Frame(self,bg="lightgray",name="frame3")
@@ -194,6 +199,10 @@ class Example(Frame):
         conversion_box = tk.Entry(frame3,textvariable = conversion_value1)
         conversion_box.place(x=180,y=80,width=165)
 
+        check1 = IntVar()
+        SEO_check = tk.Checkbutton(frame3, text="Enable SEO advice",bg="lightgray", variable=check1)
+        SEO_check.place(x=10,y=110,height=18)
+
         infobutton = tk.Button(frame3,text="info",bg='lightgray',bitmap="info",
                                command=lambda :window(self,"Here you find a short explanation\n on how to input the entry fields. \n\n Product keywords: keywords which\n best describe the product separated. \n by a comma. \n\n Average profit per sale: input in euros. \n\n Conversion to sale ratio: input in decimals."))
         infobutton.place(x=385,y=194)
@@ -201,7 +210,8 @@ class Example(Frame):
         Runbutton2 = tk.Button(frame3, text="Get Advice",bg="lightgray",fg="black",
                                command=lambda : display_template(keywords=product_name_box1.get(1.0, tk.END+"-1c"),
                                                                  conv=conversion_value1.get(),
-                                                                 prod_val=product_value1.get()))
+                                                                 prod_val=product_value1.get(),
+                                                                 check=check1.get()))
         Runbutton2.place(x=143,y=170,height=33,width=120)
 
         frame4 = tk.Frame(self,bg="lightgray",name="frame4")
@@ -232,6 +242,10 @@ class Example(Frame):
         conversion_box = tk.Entry(frame4,textvariable = conversion_value2)
         conversion_box.place(x=180,y=80,width=165)
 
+        check2 = IntVar()
+        SEO_check = tk.Checkbutton(frame4, text="Enable SEO advice",bg="lightgray", variable=check2)
+        SEO_check.place(x=10,y=110,height=18)
+
         infobutton = tk.Button(frame4,text="info",bg='lightgray',bitmap="info",
                                command=lambda :window(self,"Here you find a short explanation\n on how to input the entry fields. \n\n Product name: keyword which\n best describes the product i.e. \n stofzuiger or koelkast\n\n Average profit per sale: input in Euros. \n\n conversion to sale ratio: input in decimals."))
         infobutton.place(x=385,y=194)
@@ -239,7 +253,8 @@ class Example(Frame):
         Runbutton3 = tk.Button(frame4, text="Get Advice",bg="lightgray",fg="black",
                                command=lambda : display_template(keywords=product_name_box2.get(1.0, tk.END+"-1c"),
                                                                  conv=conversion_value2.get(),
-                                                                 prod_val=product_value2.get()))
+                                                                 prod_val=product_value2.get(),
+                                                                 check=check2.get()))
         Runbutton3.place(x=143,y=170,height=33,width=120)
 
         tabControl.place(x=0,y=59.4)
