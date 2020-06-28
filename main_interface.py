@@ -51,7 +51,7 @@ class Example(Frame):
         frame = Frame(self)
         frame.place(x=300,y=450)
 
-        def get_result_for_advice(outcome):
+        def get_result_for_advice(outcome,check):
             L = str()
             SEA = outcome[0]
             SEO = outcome[1]
@@ -77,9 +77,10 @@ class Example(Frame):
                 for i in range(3):
                     if i < len(SEA):
                         L +=(str(SEA[i])+'\n')
-                L +=('\n')
-                L +=('Deze keywords hebben wij geselecteerd op basis van de winst per product en het zoekvolume van het keyword.\n')
-                L +=('Organisch verkeer naar de website krijgen door middel van SEO lijkt ons niet haalbaar. Dit is omdat de competitie voor de relevante zoektermen te hoog is.')
+                if check == True:
+                    L +=('\n')
+                    L +=('Deze keywords hebben wij geselecteerd op basis van de winst per product en het zoekvolume van het keyword.\n')
+                    L +=('Organisch verkeer naar de website krijgen door middel van SEO lijkt ons niet haalbaar. Dit is omdat de competitie voor de relevante zoektermen te hoog is.')
             elif len(SEO) > 0:
                 L +=('SEO\n')
                 L +=('Met behulp van de gegevens die u heeft ingevuld is berekend dat u met betaald adverteren geen winst kan maken met voor uw product relevante keywords.\n')
@@ -95,7 +96,8 @@ class Example(Frame):
                 L +=('Adverteren op Google niet haalbaar\n')
                 L +=('Met behulp van de gegevens die u heeft ingevuld is berekend dat u met betaald adverteren geen winst kan maken met voor uw product relevante keywords.\n')
                 L +=('Hierom raden wij aan geen geld te besteden aan betaald adverteren op google.')
-                L +=('Organisch verkeer naar de website krijgen door middel van SEO lijkt ons ook niet haalbaar. Dit is omdat de competitie voor de relevante zoektermen te hoog is.')
+                if check == True:
+                    L +=('Organisch verkeer naar de website krijgen door middel van SEO lijkt ons ook niet haalbaar. Dit is omdat de competitie voor de relevante zoektermen te hoog is.')
             return L
         
         def display_template(keywords,prod_val,conv,check):
